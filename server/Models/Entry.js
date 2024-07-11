@@ -8,16 +8,24 @@ const entrySchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    uploaded_images: {
-        data: Buffer,
-        contentType: String,
+    uploaded_images: [{
+        data: {
+            type: Buffer
+        },
+        contentType: {
+            type: String
+        }
+    }],
+    products_links:[{
+        type: String,
         required: true
-    },
-    other_images: {
-        data: Buffer,
-        contentType: String,
-        required: true
-    },
+    }],
+    other_images: [{
+        url: {
+            type: String,
+            required: true
+        }
+    }],
     upvotes: {
         type: Number,
         default: 0,
