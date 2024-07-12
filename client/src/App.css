@@ -54,7 +54,7 @@ input[type="url"] {
   width: 100%;
 }
 
-button {
+.red-button {
   padding: 10px 46%; /* Adjust padding to center vertically */
   border: none;
   border-radius: 4px;
@@ -66,7 +66,7 @@ button {
   margin: auto; /* Center horizontally */
 }
 
-button:hover {
+.red-button:hover {
   background-color: #ff2054e1;
   color: black;
 }

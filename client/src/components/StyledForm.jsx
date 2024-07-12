@@ -85,7 +85,7 @@ const StyledForm = () => {
           </label>
         </div>
       ))}
-      <button type="submit">Submit</button>
+      <button className='red-button' type="submit">Submit</button>
       </div>
     </form>
    
