@@ -1,19 +1,79 @@
-.card-container{
+.card-container {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  justify-content:center;
+  justify-content: center;
 }
-.card{
+
+.card {
   border: 1px solid black;
   display: flex;
-  height: fit-content ;
+  height: fit-content;
   flex-direction: column;
   align-items: center;
-  padding:10px;
- 
+  padding: 10px;
 }
-.card-img{
+
+.card-img {
   height: 15rem;
-  width: 15rem
+  width: 15rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 10px auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden;
+  width: 50%;
+}
+
+form img{
+  width:100%;
+}
+form div {
+  background-color: #ffffffcc;
+  gap: 8px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="number"],
+input[type="url"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+button {
+  padding: 10px 46%; /* Adjust padding to center vertically */
+  border: none;
+  border-radius: 4px;
+  background-color: #ff003ce1;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  width: fit-content; /* Adjust width to fit content */
+  margin: auto; /* Center horizontally */
+}
+
+button:hover {
+  background-color: #ff2054e1;
+  color: black;
+}
+
+.form-container {
+  margin: 1rem 5rem 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+ 
 }
