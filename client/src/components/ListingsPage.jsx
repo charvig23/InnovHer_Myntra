@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import './App.css';
-import Lists from './components/Lists';
+import '../App.css';
+import Lists from './Lists';
 
 function ListingsPage() {
   const [users, setUsers] = useState([]);

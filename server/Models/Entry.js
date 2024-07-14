@@ -22,14 +22,12 @@ const entrySchema = new mongoose.Schema({
     }],
     other_images: [{
         url: {
-            type: String,
-            required: true
+            type: String
         }
     }],
     upvotes: {
         type: Number,
-        default: 0,
-        required: true
+        default: 0
     }
 });
 
