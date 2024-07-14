@@ -11,6 +11,10 @@ const mongoURI = "mongodb+srv://charvigu231990:" + process.env.mongo_password + 
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 
 mongoose
   .connect(mongoURI, {
@@ -40,6 +44,9 @@ app.use("/submit", upload.fields([
   { name: 'uploaded_images', maxCount: 1 },
   { name: 'other_images', maxCount: 1 }
 ]), EntryRoutes);
+
+app.use("/api", EntryRoutes);
+
 app.listen(port, () => {
   console.log("Server is running on port " + port);
 });

@@ -16,15 +16,13 @@ const entrySchema = new mongoose.Schema({
             type: String
         }
     }],
-    products_links:[{
-        type: String,
+    products_links:{
+        type: [String],
         required: true
-    }],
-    other_images: [{
-        url: {
-            type: String
-        }
-    }],
+    },
+    other_images: {
+        type: [String],
+    },
     upvotes: {
         type: Number,
         default: 0

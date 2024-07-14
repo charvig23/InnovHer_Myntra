@@ -1,32 +1,62 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Lists from './Lists';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function ListingsPage() {
-  const [users, setUsers] = useState([]);
-
-  const handleFetch = async () => {
-    try {
-      const response = await fetch('/MOCK.json'); 
-      const data = await response.json();
-      setUsers(data);
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+  const { id } = useParams();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    handleFetch();
-  }, []);
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/entry/${id}/products`);
+        const data = response.data; 
+        if (data.success) {
+          setProducts(data.data);
+          setLoading(false);
+        } else {
+          setError(data.message || 'Error fetching products');
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setError(error.message || 'Server error');
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [id]);
+
+  console.log("products", products);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <div className='card-container'>
-      {users.map(user => (
-        <Lists  key={user.id} Name={user.Name} gender={user.gender} image ={user.image}/>
+    <div className='product-list-container'>
+      {products.map((product, index) => (
+        <Lists
+          key={index}
+          imageUrl={product.imageUrl}
+          productName={product.productName}
+          productDesc = {product.productDesc}
+          productPrice={product.productPrice}
+          productLink={product.productLink}
+        />
       ))}
     </div>
   );
 }
 
 export default ListingsPage;
+

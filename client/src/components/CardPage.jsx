@@ -1,32 +1,57 @@
-import { useState, useEffect } from 'react';
-import '../App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Cards from './Cards';
 
-function CardPage() {
-  const [users, setUsers] = useState([]);
-
-  const handleFetch = async () => {
-    try {
-      const response = await fetch('/MOCK.json'); 
-      const data = await response.json();
-      setUsers(data);
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+function VotingPage() {
+  const [entries, setEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    handleFetch();
+    const fetchEntries = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/entries'); 
+        const data = response.data;
+        console.log(data);
+        if (data.success) {
+          setEntries(data.data);
+          setLoading(false);
+        } else {
+          setError(data.message || 'Error fetching entries');
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Error fetching entries:', error);
+        setError(error.message || 'Server error');
+        setLoading(false);
+      }
+    };
+
+    fetchEntries();
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
-    <div className='card-container'>
-      {users.map(user => (
-        <Cards key={user.id} Name={user.Name} gender={user.gender} image ={user.image}/>
+    <div className="card-container">
+      {entries.map((entry, index) => (
+        <Cards
+          key={entry._id}
+          image={entry.uploaded_images.length > 0 ? entry.uploaded_images[0].data : ''}
+          Name={entry.name}
+          productId={entry._id} 
+          upvotes={entry.upvotes} 
+        />
       ))}
     </div>
   );
 }
 
-export default CardPage;
+export default VotingPage;
+
