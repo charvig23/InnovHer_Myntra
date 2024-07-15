@@ -6,7 +6,7 @@
 }
 
 .card {
-  border: 1px solid black;
+  
   display: flex;
   height: fit-content;
   flex-direction: column;
@@ -76,4 +76,91 @@ input[type="url"] {
   display: flex;
   flex-direction: column;
  
+}
+
+/* Card Container Styling */
+.card {
+  max-width: 350px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.097);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #fdf9f9f0;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Styling */
+.card-img {
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Card Body Styling */
+.card-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  margin-bottom: 20px;
+}
+
+/* Button Styling */
+button {
+  justify-content: center;
+  margin-right:4px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border-radius: 3px;
+  padding: 5px 10px;
+  border: 1px solid rgba(14, 3, 3, 0.216);
+}
+
+button:hover {
+  border: 1px solid rgba(14, 3, 3, 0.622);
+}
+button .fa-thumbs-up {
+  margin-right: 8px;
+}
+
+/* Additional Styling for UpvoteCount */
+.upvote-count {
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-card {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.other-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.custom-label{
+  font-weight: 800;
+  font-size: 24px;
 }

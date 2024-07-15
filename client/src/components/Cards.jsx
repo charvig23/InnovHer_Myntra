@@ -45,6 +45,7 @@ const Cards = (props) => {
 
   return (
     <Card className="card">
+    {props.customLabel && <div className="custom-label">{props.customLabel}</div>}
       {imageSrc ? (
         <Card.Img
           variant="top"
@@ -61,7 +62,7 @@ const Cards = (props) => {
           Upvotes: {votes}
         </Card.Text>
         <Button onClick={handleUpvote} variant="primary">
-          <FontAwesomeIcon icon={faThumbsUp} /> Upvote <UpvoteCount count={votes} />
+          <FontAwesomeIcon icon={faThumbsUp} /> Upvote 
         </Button>
         <Button onClick={handleViewDetails} variant="info" className="mt-2">
           View

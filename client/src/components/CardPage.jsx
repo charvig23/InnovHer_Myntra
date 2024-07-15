@@ -14,7 +14,8 @@ function VotingPage() {
         const data = response.data;
         console.log(data);
         if (data.success) {
-          setEntries(data.data);
+          const sortedEntries = data.data.sort((a, b) => b.upvotes - a.upvotes);
+          setEntries(sortedEntries);
           setLoading(false);
         } else {
           setError(data.message || 'Error fetching entries');
@@ -37,18 +38,34 @@ function VotingPage() {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
+  const topEntry = entries[0];
+  const otherEntries = entries.slice(1);
   return (
     <div className="card-container">
-      {entries.map((entry, index) => (
-        <Cards
-          key={entry._id}
-          image={entry.uploaded_images.length > 0 ? entry.uploaded_images[0].data : ''}
-          Name={entry.name}
-          productId={entry._id} 
-          upvotes={entry.upvotes} 
-        />
-      ))}
+       {topEntry && (
+        <div className="top-card">
+          <Cards
+            customLabel="Top Performer"
+            key={topEntry._id}
+            image={topEntry.uploaded_images.length > 0 ? topEntry.uploaded_images[0].data : ''}
+            Name={topEntry.name}
+            productId={topEntry._id}
+            upvotes={topEntry.upvotes}
+          />
+        </div>
+      )}
+
+<div className="other-cards">
+        {otherEntries.map((entry, index) => (
+          <Cards
+            key={entry._id}
+            image={entry.uploaded_images.length > 0 ? entry.uploaded_images[0].data : ''}
+            Name={entry.name}
+            productId={entry._id}
+            upvotes={entry.upvotes}
+          />
+        ))}
+      </div>
     </div>
   );
 }
