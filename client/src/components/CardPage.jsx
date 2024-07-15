@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cards from './Cards';
+import { Circles } from 'react-loader-spinner';
 
 function VotingPage() {
   const [entries, setEntries] = useState([]);
@@ -32,7 +33,19 @@ function VotingPage() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Circles
+          height="80"
+          width="80"
+          color="#FF0090"
+          ariaLabel="circles-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
   }
 
   if (error) {

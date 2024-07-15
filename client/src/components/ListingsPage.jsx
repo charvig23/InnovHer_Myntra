@@ -3,6 +3,7 @@ import '../App.css';
 import Lists from './Lists';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Circles } from 'react-loader-spinner';
 
 function ListingsPage() {
   const { id } = useParams();
@@ -35,7 +36,19 @@ function ListingsPage() {
   console.log("products", products);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Circles
+          height="80"
+          width="80"
+          color="#FF0090"
+          ariaLabel="circles-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
   }
 
   if (error) {
