@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import UpvoteCount from './Upvotecount';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Cards = (props) => {
@@ -29,8 +30,21 @@ const Cards = (props) => {
     }
   }, [props.image]);
 
-  const handleUpvote = () => {
-    setVotes(votes + 1);
+  const handleUpvote = async () => {
+    const url = `http://localhost:3000/api/entry/${props.productId}/upvote`;
+    console.log('Upvote URL:', url);
+
+    try {
+      const response = await axios.post(url);
+      console.log('Response from upvote:', response.data);
+      if (response.data.success) {
+        setVotes(votes + 1);
+      } else {
+        console.error('Error upvoting entry:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error upvoting entry:', error.message);
+    }
   };
 
   const handleViewDetails = () => {
